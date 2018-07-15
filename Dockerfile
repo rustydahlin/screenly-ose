@@ -36,8 +36,8 @@ RUN mkdir -p /home/pi/.screenly /home/pi/screenly /home/pi/screenly_assets
 COPY ansible/roles/screenly/files/screenly.conf /home/pi/.screenly/screenly.conf
 
 # Install CRON Config File
-COPY cron/crontab /home/pi/.screenly/crontab
-RUN yes | cp -rf /home/pi/.screenly/crontab /etc/crontab
+COPY cron/crontab /home/pi/screenly/crontab
+RUN yes | cp -rf /home/pi/screenly/crontab /etc/crontab
 RUN service cron start
 
 # Copy in code base
