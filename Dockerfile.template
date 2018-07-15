@@ -65,6 +65,11 @@ RUN    useradd pi -d /home/pi \
 RUN mkdir -p /home/pi/screenly
 COPY ansible/roles/screenly/files/gtkrc-2.0 /home/pi/.gtkrc-2.0
 
+# Install CRON Config File
+COPY cron/crontab /home/pi/screenly/crontab
+RUN yes | cp -rf /home/pi/screenly/crontab /etc/crontab
+RUN service cron start
+
 # Copy in code base
 COPY . /home/pi/screenly
 
