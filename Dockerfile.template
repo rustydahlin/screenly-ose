@@ -4,6 +4,8 @@ MAINTAINER Anton Molodykh <amolodykh@screenly.io>
 RUN apt-get update && \
     apt-get -y install \
         build-essential \
+        cec-utils \
+        cron \
         curl \
         git-core \
         libffi-dev \
