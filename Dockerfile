@@ -17,6 +17,8 @@ RUN apt-get update && \
         python-netifaces \
         python-simplejson \
         sqlite3 \
+        cec-utils \
+        cron \
     && \
     apt-get clean
 
@@ -25,12 +27,18 @@ ADD requirements.txt /tmp/requirements.txt
 RUN curl -s https://bootstrap.pypa.io/get-pip.py | python && \
     pip install -r /tmp/requirements.txt
 
+
 # Create runtime user
 RUN useradd pi
 
 # Install config file and file structure
 RUN mkdir -p /home/pi/.screenly /home/pi/screenly /home/pi/screenly_assets
 COPY ansible/roles/screenly/files/screenly.conf /home/pi/.screenly/screenly.conf
+
+# Install CRON Config File
+COPY cron/crontab /home/pi/.screenly/crontab
+RUN yes | cp -rf /home/pi/.screenly/crontab /etc/crontab
+RUN service cron start
 
 # Copy in code base
 COPY . /home/pi/screenly
