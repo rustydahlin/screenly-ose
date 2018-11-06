@@ -19,6 +19,7 @@ RUN apt-get update && \
         sqlite3 \
         cec-utils \
         cron \
+        realvnc-vnc-server \
     && \
     apt-get clean
 
